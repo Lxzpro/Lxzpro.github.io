@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客列表页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog_list.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="image/log.png" alt="">
+        <span class="title">我的博客系统</span>
+         <!-- 使用 span 把左右两侧的元素给撑开 -->
+         <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+		<a href="blog_album.html">相册</a>
+        <a href="blog_login.html">注销</a>
+    </div>
+    <!-- 版心 -->
+    <div class="container">
+        <!-- 左侧区域，显示用户信息 -->
+        <div class="container-left">
+            <!-- 用户详情 -->
+            <div class="card">
+                <!-- 用户的头像 -->
+                <img src="image/head.jpg" alt="">
+                <!-- 用户名 -->
+                <h3>L</h3>
+                <!-- 其它信息 -->
+                <a href="https://blog.csdn.net/2302_79266421?type=blog">CSDN 地址</a>
+				<a href="https://www.acwing.com/user/myspace/index/419097/">AcWing 地址</a>
+                <a href="https://github.com/Lxzpro">GitHub 地址</a>
+                <!-- 文章分类 -->
+                <div class="counter">
+                    <span>文章</span>
+                    <span>分类</span>
+                </div>
+                <div class="counter">
+                    <span>2</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧区域，显示博客列表 -->
+        <div class="container-right">
+            <!-- 每个 blog 代表一篇博客 -->
+            <div class="blog">
+                <div class="title">《匆匆》</div>
+                <div class="date">2024-7-6</div>
+                <div class="desc">
+                    燕子去了，有再来的时候；杨柳枯了，有再青的时候；桃花谢了，有再开的时候。但是，聪明的，你告诉我，我们的日子为什么一去不复返呢？
+                </div>
+                <a href="blog_detail1.html" class="detail">查看全文&gt;&gt;</a>
+            </div>
+            <div class="blog">
+                <div class="title">哥德巴赫猜想</div>
+                <div class="date">2024-7-12</div>
+                <div class="desc">
+                    关于哥德巴赫猜想……
+                </div>
+                <a href="blog_detail2.html" class="detail">查看全文&gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

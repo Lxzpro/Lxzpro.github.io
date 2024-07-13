@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客详情页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog_detail.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="image/log.png" alt="">
+        <span class="title">我的博客系统</span>
+         <!-- 使用 span 把左右两侧的元素给撑开 -->
+         <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+		<a href="blog_album.html">相册</a>
+        <a href="blog_login.html">注销</a>
+    </div>
+    <!-- 版心 -->
+    <div class="container">
+        <!-- 左侧区域，显示用户信息 -->
+        <div class="container-left">
+            <!-- 用户详情 -->
+            <div class="card">
+                <!-- 用户的头像 -->
+                <img src="image/head.jpg" alt="">
+                <!-- 用户名 -->
+                <h3>L</h3>
+                <!-- 其它信息 -->
+                <a href="https://blog.csdn.net/2302_79266421?type=blog">CSDN 地址</a>
+				<a href="https://www.acwing.com/user/myspace/index/419097/">AcWing 地址</a>
+                <a href="https://github.com/Lxzpro">GitHub 地址</a>
+                <!-- 文章分类 -->
+                <div class="counter">
+                    <span>文章</span>
+                    <span>分类</span>
+                </div>
+                <div class="counter">
+                    <span>2</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧区域，显示博客列表 -->
+        <div class="container-right">
+            <!-- 使用这个 div 来放博客内容 -->
+            <div class="blog-content">
+                <!-- 博客的标题 -->
+                <h3>哥德巴赫猜想</h3>
+                <!-- 博客的日期 -->
+				<h5>作者：L</h5>
+                <div class="date">2024-7-12</div>
+                <!-- 博客的内容 -->
+                <div class="detail">
+                    <p>
+						哥德巴赫猜想指出：**每个大于 2 的偶数都可以表示为两个素数之和。**
+					</p>
+					<p>
+						哥德巴赫1742年在给欧拉的信中提出了以下猜想：任一大于2的整数都可写成三个质数之和 [1]。
+					</p>
+						但是哥德巴赫自己无法证明它，于是就写信请教赫赫有名的大数学家欧拉帮忙证明，但是一直到去世，欧拉也无法证明。 [2]
+					<p>
+						因现今数学界已经不使用“1也是素数”这个约定，原初猜想的现代陈述为：<br>
+						**任一大于5的整数都可写成三个质数之和。**
+					</p>
+					<p>
+						（n＞5：当n为偶数，n=2+(n-2)，n-2也是偶数，可以分解为两个质数的和；当n为奇数，n=3+(n-3)，n-3也是偶数，可以分解为两个质数的和）欧拉在回信中也提出另一等价版本，即任一大于2的偶数都可写成两个质数之和。
+					</p>
+                </div>
+        </div>
+</body>
+</html>
