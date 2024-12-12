@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客列表页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog_list.css">
+	<script type="text/javascript" src="/js/Mouse_follow.js"></script>
+</head>
+	<body>
+		<!-- 鼠标设置 -->
+		<div class="img" style="background-image: url('./image/goat.gif');">
+		
+		</div>
+		
+		<!-- 导航栏 -->
+		<div class="nav">
+			<img src="image/log.png" alt="">
+			<span class="title">我的博客系统</span>
+			<div class="current-time"></div>
+			
+			 <!-- 使用 span 把左右两侧的元素给撑开 -->
+			 <span class="spacer"></span>
+			<a href="blog_list.html">主页</a>
+			<a href="blog_edit.html">写博客</a>
+			<a href="blog_album.html">相册</a>
+			<a href="blog_login.html">注销</a>
+		</div>
+		<!-- 版心 -->
+		<div class="container">
+			<!-- 左侧区域，显示用户信息 -->
+			<div class="container-left">
+				<!-- 用户详情 -->
+				<div class="card">
+					<!-- 用户的头像 -->
+					<img src="image/head.jpg" alt="">
+					<!-- 用户名 -->
+					<h3>L</h3>
+					<!-- 其它信息 -->
+					<a href="https://blog.csdn.net/2302_79266421?type=blog">CSDN 地址</a>
+					<a href="https://www.acwing.com/user/myspace/index/419097/">AcWing 地址</a>
+					<a href="https://github.com/Lxzpro">GitHub 地址</a>
+					<!-- 文章分类 -->
+					<div class="counter">
+						<span>文章</span>
+						<span>分类</span>
+					</div>
+					<div class="counter">
+						<span>2</span>
+						<span>1</span>
+					</div>
+				</div>
+			</div>
+			<!-- 右侧区域，显示博客列表 -->
+			<div class="container-right">
+				<!-- 每个 blog 代表一篇博客 -->
+				<div class="blog">
+					<div class="title">《匆匆》</div>
+					<div class="date">2024-7-6</div>
+					<div class="desc">
+						燕子去了，有再来的时候；杨柳枯了，有再青的时候；桃花谢了，有再开的时候。但是，聪明的，你告诉我，我们的日子为什么一去不复返呢？
+					</div>
+					<a href="blog_detail1.html" class="detail">查看全文&gt;&gt;</a>
+				</div>
+				<div class="blog">
+					<div class="title">哥德巴赫猜想总结</div>
+					<div class="date">2024-7-12</div>
+					<div class="desc">
+						关于哥德巴赫猜想……
+					</div>
+					<a href="blog_detail2.html" class="detail">查看全文&gt;&gt;</a>
+				</div>
+			</div>
+			
+		</div>
+		<div class="copyright">
+				<p>&copy; 刘欣斋-软件工程三班-23044324.</p>
+		</div>
+	</body>
+	<!-- <script type="text/javascript" src="/js/Mouse_follow.js"></script> -->
+	<!-- 鼠标跟随设置 -->
+	<script>
+		 // 获取当前时间的函数
+		function getCurrentTime() {
+		    const now = new Date();
+								
+			// 获取当前的小时数，并使用padStart确保它是一个两位数，不足的前面补0
+			const year = now.getFullYear().toString().padStart(4, '0');
+			const month = (now.getMonth() + 1).toString().padStart(2, '0')
+			const day = now.getDate().toString().padStart(2, '0');
+		    const hours = now.getHours().toString().padStart(2, '0');
+		    const minutes = now.getMinutes().toString().padStart(2, '0');
+		    const seconds = now.getSeconds().toString().padStart(2, '0');
+								
+		    return `${year}年${month}月${day}日${hours}:${minutes}:${seconds}`;
+		}
+						
+		// 更新当前时间的函数
+		function updateTime() {
+		    const currentTimeElement = document.querySelector('.current-time');
+		    if (currentTimeElement) {
+		        currentTimeElement.textContent = getCurrentTime();
+		    }
+		}
+						
+		// 设置定时器，每秒更新时间
+		setInterval(updateTime, 1000)
+		
+		    // 设置定时器，每秒更新时间
+		    setInterval(updateTime, 1000);
+			
+			//鼠标跟随js
+		let img = document.querySelector('.img')
+				// 定义小图片的旋转角度
+				let deg = 0
+				// 定义小图片位于网页左侧的位置
+				let imgx = 0
+				// 定义小图片位于网页顶部的位置
+				let imgy = 0
+				// 定义小图片x轴的位置
+				let imgl = 0
+				// 定义小图片y轴的位置
+				let imgt = 0
+				// 定义小图片翻转的角度
+				let y = 0
+				// 定义一个计数器
+				let index = 0
+		
+				window.addEventListener('mousemove', function(xyz) {
+					// 获取网页左侧距离的图片位置
+					imgx = xyz.x - img.offsetLeft - img.clientWidth / 2
+					// 获取网页顶部距离图片的位置
+					imgy = xyz.y - img.offsetTop - img.clientHeight / 2
+					// 套入公式，定义图片的旋转角度
+					deg = 360 * Math.atan(imgy / imgx) / (2 * Math.PI)
+					// 每当鼠标移动的时候重置index
+					index = 0
+					// 定义当前鼠标的位置
+					let x = event.clientX
+					// 当鼠标的x轴大于图片的时候，提普安就要对着鼠标，所以需要将图片翻转过来
+					// 否则就不用翻转
+					if (img.offsetLeft < x) {
+						y = 180
+					} else {
+						y = 0
+					}
+				})
+				var id = setInterval(function() {
+					// 设置小图片的旋转和翻转
+					img.style.transform = "rotateZ(" + deg + "deg) rotateY(" + y + "deg)"
+					index++
+					// 在这里设置小图片的位置和速度，并判断小图片到达鼠标位置时停止移动
+					if (index < 50) {  //这里把鼠标图片到鼠标的距离分成50份，每次更新1/50的距离。
+						imgl += imgx / 50
+						imgt += imgy / 50
+					}
+					img.style.left = imgl + "px"
+					img.style.top = imgt + "px"
+				}, 10)
+	</script>
+</html>

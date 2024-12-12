@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog-register.css">
+	<script type="text/javascript" src="/js/Mouse_follow.js"></script>
+	<!-- 验证码样式 -->
+	<style>
+	    #code{ 
+	          font-family:Arial,宋体; 
+	          font-style:italic; 
+	          color:green; 
+	          border:0; 
+	          padding:2px 3px; 
+	          letter-spacing:3px; 
+	          font-weight:bolder; 
+	        }
+	</style>
+</head>
+<body onload="createCode()">
+	<!-- 鼠标设置 -->
+	<div class="img" style="background-image: url('./image/goat.gif');">
+		
+	</div>
+	
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="image/log.png" alt="log">
+        <span class="title">我的博客系统</span>
+		<div class="current-time"></div>
+		
+         <!-- 使用 span 把左右两侧的元素给撑开 -->
+         <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+		<a href="blog_album.html">相册</a>
+        <a href="blog_login.html">注销</a>
+    </div>
+    <!-- 登录页面 -->
+    <div class="register-container">
+        <div class="register-dialog">
+            <h3>注册</h3>
+            <div class="row1">
+                <span>用户名</span>
+                <input class="register-text" type="text" id="username">
+            </div>
+			
+			<div class="row1">
+			    <span>手机号</span>
+			    <input class="register-text" type="text" id="username">
+			</div>
+			
+            <div class="row1">
+                <span>密码</span>
+                <input class="register-text" type="password" id="password">
+            </div>
+			
+			<div class="row1">
+			    <span>确认密码</span>
+			    <input class="register-text" type="password" id="password">
+			</div>
+			
+			<div class="row1">
+			    <span>邮箱</span>
+			    <input class="register-text" type="password" id="password">
+			</div>
+			<div class="row1">
+				<span style="color: brown">验证码</span>
+				<input class="register-text" style="width: 100px;" type="text" id="input" />
+				<div style="width: 40px;""></div>
+				<input type="button" id="code" onclick="createCode()" title='点击更换验证码' />
+			</div>
+			
+            <div class="row2">
+                <input type="button" value="注册" id="submit" onclick="validate()">
+			</div>
+        </div>
+    </div>
+	<div class="copyright">
+			<p>&copy; 刘欣斋-软件工程三班-23044324.</p>
+	</div>
+</body>
+<!-- <script type="text/javascript" src="/js/Mouse_follow.js"></script> -->
+	<!-- 鼠标跟随设置 -->
+	<script>
+		// 获取当前时间的函数
+		   function getCurrentTime() {
+		       const now = new Date();
+						
+				// 获取当前的小时数，并使用padStart确保它是一个两位数，不足的前面补0
+				const year = now.getFullYear().toString().padStart(4, '0');
+				const month = (now.getMonth() + 1).toString().padStart(2, '0')
+				const day = now.getDate().toString().padStart(2, '0');
+		        const hours = now.getHours().toString().padStart(2, '0');
+		        const minutes = now.getMinutes().toString().padStart(2, '0');
+		        const seconds = now.getSeconds().toString().padStart(2, '0');
+						
+		        return `${year}年${month}月${day}日${hours}:${minutes}:${seconds}`;
+		   }
+				
+		   // 更新当前时间的函数
+		   function updateTime() {
+		       const currentTimeElement = document.querySelector('.current-time');
+		       if (currentTimeElement) {
+		           currentTimeElement.textContent = getCurrentTime();
+		       }
+		   }
+				
+		   // 设置定时器，每秒更新时间
+		   setInterval(updateTime, 1000);
+			
+		let img = document.querySelector('.img')
+				// 定义小图片的旋转角度
+				let deg = 0
+				// 定义小图片位于网页左侧的位置
+				let imgx = 0
+				// 定义小图片位于网页顶部的位置
+				let imgy = 0
+				// 定义小图片x轴的位置
+				let imgl = 0
+				// 定义小图片y轴的位置
+				let imgt = 0
+				// 定义小图片翻转的角度
+				let y = 0
+				// 定义一个计数器
+				let index = 0
+		
+				window.addEventListener('mousemove', function(xyz) {
+					// 获取网页左侧距离的图片位置
+					imgx = xyz.x - img.offsetLeft - img.clientWidth / 2
+					// 获取网页顶部距离图片的位置
+					imgy = xyz.y - img.offsetTop - img.clientHeight / 2
+					// 套入公式，定义图片的旋转角度
+					deg = 360 * Math.atan(imgy / imgx) / (2 * Math.PI)
+					// 每当鼠标移动的时候重置index
+					index = 0
+					// 定义当前鼠标的位置
+					let x = event.clientX
+					// 当鼠标的x轴大于图片的时候，提普安就要对着鼠标，所以需要将图片翻转过来
+					// 否则就不用翻转
+					if (img.offsetLeft < x) {
+						y = 180
+					} else {
+						y = 0
+					}
+				})
+				var id = setInterval(function() {
+					// 设置小图片的旋转和翻转
+					img.style.transform = "rotateZ(" + deg + "deg) rotateY(" + y + "deg)"
+					index++
+					// 在这里设置小图片的位置和速度，并判断小图片到达鼠标位置时停止移动
+					if (index < 50) {  //这里把鼠标图片到鼠标的距离分成50份，每次更新1/50的距离。
+						imgl += imgx / 50
+						imgt += imgy / 50
+					}
+					img.style.left = imgl + "px"
+					img.style.top = imgt + "px"
+				}, 10)
+				
+		// 验证码
+		var code ; //在全局定义验证码
+		       
+		function createCode(){ 
+		  code = "";  
+		  var codeLength = 4;//验证码的长度  
+		  var checkCode = document.getElementById("code");  
+		  var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',  
+		                         'S','T','U','V','W','X','Y','Z');//随机数  
+		  for(var i = 0; i < codeLength; i++) {//循环操作  
+		    var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）  
+		    code += random[index];//根据索引取得随机数加到code上  
+		  }  
+		  checkCode.value = code;//把code值赋给验证码  
+		} 
+		//校验验证码  
+		function validate(){  
+		  var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写     
+		  if(inputCode.length <= 0) { //若输入的验证码长度为0  
+		    alert("请输入验证码！"); //则弹出请输入验证码  
+		  }else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时  
+		    alert("验证码输入错误！@_@"); //则弹出验证码输入错误  
+		    createCode();//刷新验证码  
+		    document.getElementById("input").value = "";//清空文本框
+		  }else { //输入正确时
+		    alert("注册成功！快去登录吧^-^");
+			window.location.href = "blog_login.html"
+		  }
+		}
+	</script>
+</html>

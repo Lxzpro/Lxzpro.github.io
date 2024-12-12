@@ -1,0 +1,71 @@
+/* 这个 CSS 文件是放登陆页面的专属样式 */
+
+/* 1. 设置版心，让这个版心将页面填充满 */
+/* 2. 在版心中间位置，设置一个登陆区域 */
+.register-container {
+    width: 100%;
+    height: calc(100% - 50px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container .register-dialog {
+    width: 350px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+}
+
+.register-dialog h3 {
+    text-align: center;
+    padding: 30px;
+    font-size: 25px;
+}
+
+.register-dialog .row1 {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-dialog .row2 {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.register-dialog .row1 span {
+    width: 80px;
+    font-weight: 700;
+}
+
+.register-dialog .row1 .register-text {
+    width: 200px;
+    height: 30px;
+    font-size: 15px;
+    padding-left: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    /* 去掉边框 */
+    border: none;
+    /* 去掉轮廓线（选中输入框时，外面的黑边） */
+    outline: none;
+}
+
+.register-dialog .row2 input {
+    width: 280px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: rgba(41, 83, 149, 0.7);
+    border: none;
+}
+
+.register-dialog .row2 input:active {
+    background-color: black;
+    color: white;
+}
