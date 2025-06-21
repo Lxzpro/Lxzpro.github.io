@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧星暑假班 - 精品小班制教学</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#F97316',
+            accent: '#10B981',
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+      }
+      .btn-primary {
+        @apply bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer;
+      }
+      .btn-secondary {
+        @apply bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer;
+      }
+    }
+  </style>
+</head>
+<body class="bg-light text-dark">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+    <div class="container mx-auto px-4">
+      <nav class="flex items-center justify-between h-16 md:h-20">
+        <div class="flex items-center">
+          <span class="text-primary text-2xl font-bold">智慧星暑假班</span>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <div class="hidden md:flex space-x-8">
+          <a href="#home" class="text-dark hover:text-primary font-medium transition-colors">首页</a>
+          <a href="#courses" class="text-dark hover:text-primary font-medium transition-colors">课程介绍</a>
+          <a href="#benefits" class="text-dark hover:text-primary font-medium transition-colors">课程优势</a>
+          <a href="#teachers" class="text-dark hover:text-primary font-medium transition-colors">师资力量</a>
+          <a href="#contact" class="text-dark hover:text-primary font-medium transition-colors">联系我们</a>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-dark hover:text-primary focus:outline-none">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
+        </div>
+      </nav>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="px-4 py-2 space-y-1">
+        <a href="#home" class="block py-2 text-dark hover:text-primary font-medium">首页</a>
+        <a href="#courses" class="block py-2 text-dark hover:text-primary font-medium">课程介绍</a>
+        <a href="#benefits" class="block py-2 text-dark hover:text-primary font-medium">课程优势</a>
+        <a href="#teachers" class="block py-2 text-dark hover:text-primary font-medium">师资力量</a>
+        <a href="#contact" class="block py-2 text-dark hover:text-primary font-medium">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section id="home" class="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-br from-primary to-primary/80 text-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-shadow mb-6">
+            暑假黄金期<br>成长不放假
+          </h1>
+          <p class="text-lg md:text-xl mb-8 max-w-xl">
+            专注幼小衔接和小学各年级学科提升，精品小班制教学，让孩子在暑假实现弯道超车！
+          </p>
+          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#courses" class="btn-primary text-center">
+              <i class="fa fa-book mr-2"></i> 查看课程
+            </a>
+            <a href="#contact" class="btn-secondary text-center">
+              <i class="fa fa-phone mr-2"></i> 立即咨询
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <img src="https://picsum.photos/id/180/600/400" alt="暑假班课堂场景" class="rounded-lg shadow-2xl max-w-full h-auto">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 课程介绍 -->
+  <section id="courses" class="py-16 bg-light">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">精品课程</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">针对不同年龄段和学习需求，我们精心设计了多样化的课程体系</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 幼小衔接班 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/200/600/400" alt="幼小衔接班课堂" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold text-dark">幼小衔接班</h3>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                10-15人
+              </span>
+            </div>
+            <p class="text-gray-600 mb-4">
+              帮助孩子顺利过渡到小学阶段，培养学习习惯、专注力和基础学科知识，让孩子赢在起跑线。
+            </p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <i class="fa fa-clock-o mr-2"></i> 20课时
+              <span class="mx-3">•</span>
+              <i class="fa fa-calendar mr-2"></i> 7月-8月
+            </div>
+          </div>
+        </div>
+        
+        <!-- 一升二语数提升班 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/201/600/400" alt="一升二语数提升班" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold text-dark">一升二语数提升班</h3>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                10-15人
+              </span>
+            </div>
+            <p class="text-gray-600 mb-4">
+              巩固一年级知识，提前预习二年级内容，重点提升语文阅读和数学思维能力。
+            </p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <i class="fa fa-clock-o mr-2"></i> 24课时
+              <span class="mx-3">•</span>
+              <i class="fa fa-calendar mr-2"></i> 7月-8月
+            </div>
+          </div>
+        </div>
+        
+        <!-- 二升三英语衔接、数学提升班 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/202/600/400" alt="二升三英语数学提升班" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold text-dark">二升三英语衔接、数学提升</h3>
+              <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                10-15人
+              </span>
+            </div>
+            <p class="text-gray-600 mb-4">
+              英语从零起步，培养英语听说读写基础能力；数学加强应用题和思维训练，为三年级学习打下坚实基础。
+            </p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <i class="fa fa-clock-o mr-2"></i> 30课时
+              <span class="mx-3">•</span>
+              <i class="fa fa-calendar mr-2"></i> 7月-8月
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 五升六、小升初 -->
+      <div class="mt-12 bg-gradient-to-r from-secondary/10 to-accent/10 rounded-xl p-8">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-2/3 mb-6 md:mb-0">
+            <h3 class="text-2xl font-bold text-dark mb-4">五升六、小升初 专项辅导</h3>
+            <p class="text-gray-600 mb-4">
+              针对小升初关键阶段，提供个性化辅导方案，帮助学生系统梳理知识体系，强化薄弱环节，提升应试能力，轻松应对升学挑战。
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h4 class="font-bold text-primary mb-2">一对一</h4>
+                <p class="text-sm text-gray-600">专属定制，查漏补缺</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h4 class="font-bold text-primary mb-2">一对二</h4>
+                <p class="text-sm text-gray-600">伙伴共学，高效提升</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h4 class="font-bold text-primary mb-2">一对多</h4>
+                <p class="text-sm text-gray-600">小班互动，全面突破</p>
+              </div>
+            </div>
+          </div>
+          <div class="md:w-1/3 flex justify-center">
+            <img src="https://picsum.photos/id/203/400/300" alt="小升初辅导" class="rounded-lg shadow-lg max-w-full h-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 课程优势 -->
+  <section id="benefits" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">课程优势</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">为什么选择我们的暑假班？</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- 优势1 -->
+        <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+          <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa fa-users text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-3">精品小班制</h3>
+          <p class="text-gray-600">
+            每班仅招10-15人，确保每位学生都能得到充分关注，老师可以针对性指导。
+          </p>
+        </div>
+        
+        <!-- 优势2 -->
+        <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+          <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa fa-certificate text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-3">专业师资</h3>
+          <p class="text-gray-600">
+            所有教师均具有丰富教学经验，熟悉小学各阶段知识点和学习特点。
+          </p>
+        </div>
+        
+        <!-- 优势3 -->
+        <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+          <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa fa-book text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-3">定制课程</h3>
+          <p class="text-gray-600">
+            根据学生年龄和学习水平定制课程内容，循序渐进，科学提升学习能力。
+          </p>
+        </div>
+        
+        <!-- 优势4 -->
+        <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+          <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+            <i class="fa fa-gift text-2xl text-primary"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-3">超值福利</h3>
+          <p class="text-gray-600">
+            现在报名即送精美学习资料，还有机会参与暑期学习大礼包抽奖。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 师资力量 -->
+  <section id="teachers" class="py-16 bg-light">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">师资力量</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">我们的教师团队经验丰富，责任心强，致力于帮助每个孩子取得进步</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- 教师1 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/64/400/500" alt="张老师 - 语文教学专家" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-1">张老师</h3>
+            <p class="text-primary mb-3">语文教学专家</p>
+            <p class="text-gray-600 text-sm">
+              拥有10年小学语文教学经验，专注于阅读和写作训练，教学方法生动有趣，深受学生喜爱。
+            </p>
+          </div>
+        </div>
+        
+        <!-- 教师2 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/91/400/500" alt="李老师 - 数学金牌讲师" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-1">李老师</h3>
+            <p class="text-primary mb-3">数学金牌讲师</p>
+            <p class="text-gray-600 text-sm">
+              曾任职重点小学，擅长激发学生数学思维，帮助众多学生提升数学成绩，教学成果显著。
+            </p>
+          </div>
+        </div>
+        
+        <!-- 教师3 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/26/400/500" alt="王老师 - 英语启蒙导师" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-1">王老师</h3>
+            <p class="text-primary mb-3">英语启蒙导师</p>
+            <p class="text-gray-600 text-sm">
+              英语专业八级，有丰富的少儿英语教学经验，注重听说读写全面发展，教学风格活泼。
+            </p>
+          </div>
+        </div>
+        
+        <!-- 教师4 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+          <img src="https://picsum.photos/id/65/400/500" alt="陈老师 - 幼小衔接专家" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-dark mb-1">陈老师</h3>
+            <p class="text-primary mb-3">幼小衔接专家</p>
+            <p class="text-gray-600 text-sm">
+              专注幼小衔接教育多年，熟悉幼儿心理和学习特点，善于培养孩子良好的学习习惯。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 报名优惠 -->
+  <section id="offer" class="py-16 bg-primary text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">限时优惠</h2>
+        <p class="text-lg max-w-2xl mx-auto opacity-90">提前报名享受多重优惠，名额有限，先到先得！</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 优惠1 -->
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 card-hover">
+          <div class="text-4xl font-bold mb-4">早鸟优惠</div>
+          <p class="mb-4 opacity-90">
+            6月30日前报名，立减200元！
+          </p>
+          <div class="text-2xl font-bold mt-6">
+            <i class="fa fa-calendar-check-o mr-2"></i> 截止日期：6月30日
+          </div>
+        </div>
+        
+        <!-- 优惠2 -->
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 card-hover">
+          <div class="text-4xl font-bold mb-4">团体报名</div>
+          <p class="mb-4 opacity-90">
+            3人及以上成团报名，每人再减100元！
+          </p>
+          <div class="text-2xl font-bold mt-6">
+            <i class="fa fa-users mr-2"></i> 3人即可成团
+          </div>
+        </div>
+        
+        <!-- 优惠3 -->
+        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 card-hover">
+          <div class="text-4xl font-bold mb-4">赠送礼包</div>
+          <p class="mb-4 opacity-90">
+            所有报名学员均赠送价值198元的学习大礼包！
+          </p>
+          <div class="text-2xl font-bold mt-6">
+            <i class="fa fa-gift mr-2"></i> 教材+文具+课程资料
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我们 -->
+  <section id="contact" class="py-16 bg-light">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h2 class="text-3xl md:text-4xl font-bold text-dark mb-6">联系我们</h2>
+          <p class="text-gray-600 mb-8 max-w-lg">
+            如果您对我们的暑假班有任何疑问，欢迎随时联系我们，我们将为您提供详细解答。
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fa fa-phone text-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-dark mb-1">电话咨询</h3>
+                <p class="text-gray-600">198-6101-1663</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fa fa-map-marker text-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-dark mb-1">校区地址</h3>
+                <p class="text-gray-600">小鬼当家照相馆西邻胡同</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fa fa-clock-o text-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-dark mb-1">咨询时间</h3>
+                <p class="text-gray-600">周一至周日 9:00-18:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="md:w-1/2">
+          <div class="bg-white p-8 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold text-dark mb-6">咨询方式</h3>
+            <div class="space-y-4">
+              <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fa fa-phone text-xl text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">电话咨询</h4>
+                  <p class="text-gray-600">198-6101-1663</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fa fa-weixin text-xl text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">微信咨询</h4>
+                  <p class="text-gray-600">扫描下方二维码添加客服微信</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <i class="fa fa-map-marker text-xl text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-dark">校区地址</h4>
+                  <p class="text-gray-600">小鬼当家照相馆西邻胡同</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">智慧星暑假班</h3>
+          <p class="text-gray-400 mb-4">
+            专注幼小衔接和小学各年级学科提升，让孩子在暑假实现弯道超车！
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-qq text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">课程介绍</a></li>
+            <li><a href="#benefits" class="text-gray-400 hover:text-white transition-colors">课程优势</a></li>
+            <li><a href="#teachers" class="text-gray-400 hover:text-white transition-colors">师资力量</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">课程体系</h3>
+          <ul class="space-y-2">
+            <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">幼小衔接班</a></li>
+            <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">一升二语数提升班</a></li>
+            <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">二升三英语衔接、数学提升班</a></li>
+            <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">五升六、小升初专项辅导</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-4">联系方式</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center">
+              <i class="fa fa-phone mr-2 text-gray-400"></i>
+              <span class="text-gray-400">198-6101-1663</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker mr-2 text-gray-400 mt-1"></i>
+              <span class="text-gray-400">小鬼当家照相馆西邻胡同</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fa fa-clock-o mr-2 text-gray-400"></i>
+              <span class="text-gray-400">周一至周日 9:00-18:00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-400">
+        <p>&copy; 2025 智慧星暑假班. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('shadow-md');
+        navbar.classList.add('py-2');
+        navbar.classList.remove('py-4');
+      } else {
+        navbar.classList.remove('shadow-md');
+        navbar.classList.add('py-4');
+        navbar.classList.remove('py-2');
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动端菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // 回到顶部按钮
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.add('opacity-0', 'invisible');
+        backToTopButton.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>  
