@@ -1535,7 +1535,8 @@ const Bornforthis = {
             break;
           case "重庆市省":
             address = "重庆市";
-            welcome_info = "高德地图:已到达重庆，下面交给百度地图导航"
+            // welcome_info = "高德地图:已到达重庆，下面交给百度地图导航"
+            welcome_info = "欢迎黄昀凡学妹光临我的blog！！！如果有机会！带我去重庆逛一逛🤭"
             break;
           case "河北省":
             welcome_info = "山势巍巍成壁垒，天下雄关。铁马金戈由此向，无限江山";
