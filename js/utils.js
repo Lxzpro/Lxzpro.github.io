@@ -1533,7 +1533,7 @@ const Bornforthis = {
             address = "天津市";
             welcome_info = "讲段相声吧";
             break;
-          case "重庆市":
+          case "重庆市省":
             address = "重庆市";
             welcome_info = "高德地图:已到达重庆，下面交给百度地图导航"
             break;
