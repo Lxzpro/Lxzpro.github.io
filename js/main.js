@@ -1800,6 +1800,10 @@ document.addEventListener("DOMContentLoaded", function () {
     anzhiyu.addEventListenerConsoleMusicList(false);
     anzhiyu.initPaginationObserver();
 
+    // 以上是原有的
+    // 欢迎信息
+    Bornforthis.setWelcome_info();
+
     setTimeout(() => {
       setInputFocusListener();
       if (typeof addFriendLinksInFooter === "function") {
