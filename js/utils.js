@@ -1492,7 +1492,7 @@ const Bornforthis = {
       // IP = ipStore.ip || "未知";
       IP = ipStore.data.ip || "未知";
     // let dist = Bornforthis.getDistance(填写你的经度, 填写你的纬度, ipStore.data.lng, ipStore.data.lat),
-    let dist = Bornforthis.getDistance(45.70446, 126.606997, ipStore.data.lng, ipStore.data.lat),
+    let dist = Bornforthis.getDistance(126.606997, 45.70446, ipStore.data.lng, ipStore.data.lat),
       address,
       welcome_info;
     //根据国家、省份、城市信息自定义欢迎语
