@@ -281,21 +281,98 @@
     }
   }
 
-  function aiAbstractLocal() {
-    const strArr = postAI.split(",").map(item => item.trim());
-    if (strArr.length !== 1) {
-      let randomIndex = Math.floor(Math.random() * strArr.length);
-      while (randomIndex === lastAiRandomIndex) {
-        randomIndex = Math.floor(Math.random() * strArr.length);
-      }
-      lastAiRandomIndex = randomIndex;
-      startAI(strArr[randomIndex]);
-    } else {
-      startAI(strArr[0]);
+  // function aiAbstractLocal() {
+  //   const strArr = postAI.split(",").map(item => item.trim());
+  //   if (strArr.length !== 1) {
+  //     let randomIndex = Math.floor(Math.random() * strArr.length);
+  //     while (randomIndex === lastAiRandomIndex) {
+  //       randomIndex = Math.floor(Math.random() * strArr.length);
+  //     }
+  //     lastAiRandomIndex = randomIndex;
+  //     startAI(strArr[randomIndex]);
+  //   } else {
+  //     startAI(strArr[0]);
+  //   }
+  //   setTimeout(() => {
+  //     aiTitleRefreshIcon.style.opacity = "1";
+  //   }, 600);
+  // }
+
+// 新本地模式函数（对接 DeepSeek API）
+  async function aiAbstractLocal() {
+    // 1. 准备调用参数（从主题配置中获取 Key 和 Referer）
+    const deepSeekKey = AIKey; // 主题配置中 post_head_ai_description.key 字段
+    const blogReferer = AIReferer; // 主题配置中 post_head_ai_description.Referer 字段
+    const maxSummaryLength = 300; // 摘要最大字数（可改 200-500）
+    
+    // 2. 提取文章内容（与天离模式逻辑一致，确保内容长度达标）
+    const articleContent = (title + pageFillDescription).trim();
+    const truncateContent = articleContent.substring(0, basicWordCount); // 截取基础字数
+    if (truncateContent.length < 100) {
+      startAI("文章内容过短，无法生成摘要~");
+      setTimeout(() => aiTitleRefreshIcon.style.opacity = "1", 600);
+      return;
     }
-    setTimeout(() => {
-      aiTitleRefreshIcon.style.opacity = "1";
-    }, 600);
+
+    // 3. 显示「生成中」提示
+    explanation.innerHTML = "生成中. . .";
+    aiTitleRefreshIcon.style.opacity = "0.2"; // 刷新图标置灰
+
+    try {
+      // 4. 调用 DeepSeek API（核心请求逻辑）
+      const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${deepSeekKey}` // 关键：DeepSeek Key 授权
+        },
+        body: JSON.stringify({
+          model: "deepseek-chat", // DeepSeek 基础模型（固定值，不要改）
+          messages: [
+            {
+              role: "user",
+              content: `你是博客文章摘要助手，需基于以下内容生成摘要：
+              1. 字数控制在 ${maxSummaryLength} 字以内，只保留核心内容（如主题、步骤、结论）；
+              2. 语言简洁，不用换行和列表，纯段落式；
+              3. 不添加额外评价、建议或扩展内容。
+              文章内容：${truncateContent}`
+            }
+          ],
+          max_tokens: maxSummaryLength, // 限制摘要最大长度（与上面一致）
+          temperature: 0.7, // 随机性：0.7 适中（0-1 之间，越低越固定）
+          stream: false // 关闭流式返回，一次性获取完整摘要
+        })
+      });
+
+      // 5. 处理 API 响应
+      if (!response.ok) {
+        throw new Error(`API 请求失败（状态码：${response.status}）`);
+      }
+      const result = await response.json();
+      const summary = result.choices[0].message.content.trim(); // 提取摘要内容
+
+      // 6. 显示生成的摘要
+      if (summary) {
+        startAI(summary); // 调用现有动画函数显示摘要
+      } else {
+        startAI("未获取到摘要，请点击刷新重试~");
+      }
+
+    } catch (error) {
+      // 7. 错误处理（显示友好提示）
+      console.error("DeepSeek 摘要生成失败：", error);
+      let errorMsg = "摘要生成失败，请检查 API Key 或网络~";
+      if (error.message.includes("401")) {
+        errorMsg = "API Key 错误，请核对后重新配置~";
+      } else if (error.message.includes("403")) {
+        errorMsg = "API 权限不足，可能是额度用尽~";
+      }
+      startAI(errorMsg);
+
+    } finally {
+      // 8. 恢复刷新图标状态
+      setTimeout(() => aiTitleRefreshIcon.style.opacity = "1", 600);
+    }
   }
 
   function aiRecommend() {
@@ -370,18 +447,35 @@
     aiTitleRefreshIcon.click();
   }
 
+  // function onAiTagClick() {
+  //   if (mode === "tianli") {
+  //     post_ai.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "none"));
+  //     document.getElementById("go-tianli-blog").style.display = "block";
+  //     startAI(
+  //       "你好，我是Tianli开发的摘要生成助理TianliGPT，是一个基于GPT-4的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通，如果你也需要一个这样的AI摘要接口，可以在下方购买。"
+  //     );
+  //   } else {
+  //     post_ai.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "block"));
+  //     document.getElementById("go-tianli-blog").style.display = "none";
+  //     startAI(
+  //       `你好，我是本站摘要生成助理${gptName} GPT，是一个基于GPT-4的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通。`
+  //     );
+  //   }
+  // }
   function onAiTagClick() {
     if (mode === "tianli") {
+      // 天离模式介绍（无需修改）
       post_ai.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "none"));
       document.getElementById("go-tianli-blog").style.display = "block";
       startAI(
         "你好，我是Tianli开发的摘要生成助理TianliGPT，是一个基于GPT-4的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通，如果你也需要一个这样的AI摘要接口，可以在下方购买。"
       );
     } else {
+      // 本地模式介绍（修改为 DeepSeek 描述）
       post_ai.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "block"));
       document.getElementById("go-tianli-blog").style.display = "none";
       startAI(
-        `你好，我是本站摘要生成助理${gptName} GPT，是一个基于GPT-4的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通。`
+        `你好，我是本站摘要生成助理${gptName}，基于 DeepSeek AI 开发。我负责生成本文核心摘要，点击下方按钮可获取推荐文章或返回主页~`
       );
     }
   }
@@ -409,23 +503,41 @@
     refreshNum++;
   }
 
+  // function changeShowMode() {
+  //   mode = mode === "tianli" ? "local" : "tianli";
+  //   if (mode === "tianli") {
+  //     document.getElementById("ai-tag").innerHTML = "TianliGPT";
+
+  //     aiReadAloudIcon.style.opacity = "1";
+  //     aiReadAloudIcon.style.cursor = "pointer";
+  //   } else {
+  //     aiReadAloudIcon.style.opacity = "0";
+  //     aiReadAloudIcon.style.cursor = "auto";
+  //     if ((document.getElementById("go-tianli-blog").style.display = "block")) {
+  //       document.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "block"));
+  //       document.getElementById("go-tianli-blog").style.display = "none";
+  //     }
+  //     document.getElementById("ai-tag").innerHTML = gptName + " GPT";
+  //   }
+  //   aiAbstract();
+  // }
   function changeShowMode() {
     mode = mode === "tianli" ? "local" : "tianli";
     if (mode === "tianli") {
+      // 天离模式逻辑（无需修改）
       document.getElementById("ai-tag").innerHTML = "TianliGPT";
-
       aiReadAloudIcon.style.opacity = "1";
       aiReadAloudIcon.style.cursor = "pointer";
     } else {
-      aiReadAloudIcon.style.opacity = "0";
-      aiReadAloudIcon.style.cursor = "auto";
-      if ((document.getElementById("go-tianli-blog").style.display = "block")) {
-        document.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "block"));
-        document.getElementById("go-tianli-blog").style.display = "none";
-      }
+      // 本地模式逻辑（修改这里，隐藏天离按钮和语音图标）
       document.getElementById("ai-tag").innerHTML = gptName + " GPT";
+      aiReadAloudIcon.style.opacity = "0"; // 隐藏语音图标（DeepSeek 无语音功能）
+      aiReadAloudIcon.style.cursor = "auto";
+      // 关键：隐藏天离购买按钮，显示其他功能按钮
+      document.getElementById("go-tianli-blog").style.display = "none";
+      document.querySelectorAll(".ai-btn-item").forEach(item => item.style.display = "block");
     }
-    aiAbstract();
+    aiAbstract(); // 切换后重新生成摘要
   }
 
   function showAiBtn() {
